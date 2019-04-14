@@ -1,0 +1,284 @@
+EESchema Schematic File Version 4
+LIBS:valdiklis-cache
+EELAYER 29 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L unicon:unicon_v1 M1
+U 1 1 5CB3A4C3
+P 5550 3100
+F 0 "M1" H 5550 4565 50  0000 C CNN
+F 1 "unicon_v1" H 5550 4474 50  0000 C CNN
+F 2 "unicon:unicon" H 5550 6200 50  0001 C CNN
+F 3 "" H 5550 6200 50  0001 C CNN
+	1    5550 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0101
+U 1 1 5CB3D3F4
+P 2800 2500
+F 0 "#PWR0101" H 2800 2250 50  0001 C CNN
+F 1 "GND" H 2805 2327 50  0000 C CNN
+F 2 "" H 2800 2500 50  0001 C CNN
+F 3 "" H 2800 2500 50  0001 C CNN
+	1    2800 2500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2800 2500 2800 2400
+Wire Wire Line
+	3200 2100 3500 2100
+Text Label 3500 2100 2    50   ~ 0
+DHT1
+$Comp
+L power:+5V #PWR0102
+U 1 1 5CB3DD61
+P 2800 1750
+F 0 "#PWR0102" H 2800 1600 50  0001 C CNN
+F 1 "+5V" H 2815 1923 50  0000 C CNN
+F 2 "" H 2800 1750 50  0001 C CNN
+F 3 "" H 2800 1750 50  0001 C CNN
+	1    2800 1750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2800 1750 2800 1800
+Wire Wire Line
+	4600 1950 4300 1950
+Text Label 4300 1950 0    50   ~ 0
+12VDC
+Wire Wire Line
+	4600 2050 4300 2050
+Text Label 4300 2050 0    50   ~ 0
+5VDC
+$Comp
+L power:GND #PWR0103
+U 1 1 5CB3E9D5
+P 4550 2250
+F 0 "#PWR0103" H 4550 2000 50  0001 C CNN
+F 1 "GND" V 4555 2122 50  0000 R CNN
+F 2 "" H 4550 2250 50  0001 C CNN
+F 3 "" H 4550 2250 50  0001 C CNN
+	1    4550 2250
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR0104
+U 1 1 5CB3F0F1
+P 4550 2350
+F 0 "#PWR0104" H 4550 2100 50  0001 C CNN
+F 1 "GND" V 4555 2222 50  0000 R CNN
+F 2 "" H 4550 2350 50  0001 C CNN
+F 3 "" H 4550 2350 50  0001 C CNN
+	1    4550 2350
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR0105
+U 1 1 5CB3F292
+P 4550 2450
+F 0 "#PWR0105" H 4550 2200 50  0001 C CNN
+F 1 "GND" V 4555 2322 50  0000 R CNN
+F 2 "" H 4550 2450 50  0001 C CNN
+F 3 "" H 4550 2450 50  0001 C CNN
+	1    4550 2450
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4550 2250 4600 2250
+Wire Wire Line
+	4550 2350 4600 2350
+Wire Wire Line
+	4550 2450 4600 2450
+$Comp
+L power:GND #PWR0106
+U 1 1 5CB3F94A
+P 6550 2550
+F 0 "#PWR0106" H 6550 2300 50  0001 C CNN
+F 1 "GND" V 6555 2422 50  0000 R CNN
+F 2 "" H 6550 2550 50  0001 C CNN
+F 3 "" H 6550 2550 50  0001 C CNN
+	1    6550 2550
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	6550 2550 6500 2550
+$Comp
+L dht11:DHT11 U1
+U 1 1 5CB3B048
+P 2900 2100
+F 0 "U1" H 2670 2146 50  0000 R CNN
+F 1 "DHT11" H 2670 2055 50  0000 R CNN
+F 2 "dth11:DHT11" H 3050 2350 50  0001 C CNN
+F 3 "http://akizukidenshi.com/download/ds/aosong/DHT11.pdf" H 3050 2350 50  0001 C CNN
+	1    2900 2100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Driver_Motor:L298HN U2
+U 1 1 5CB3D108
+P 8800 2850
+F 0 "U2" H 8450 3500 50  0000 C CNN
+F 1 "L298HN" H 9100 3500 50  0000 C CNN
+F 2 "Package_TO_SOT_THT:TO-220-15_P2.54x2.54mm_StaggerOdd_Lead4.58mm_Vertical" H 8850 2200 50  0001 L CNN
+F 3 "http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/CD00000240.pdf" H 8950 3100 50  0001 C CNN
+	1    8800 2850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9400 2650 9500 2650
+Wire Wire Line
+	9500 2650 9500 2950
+Wire Wire Line
+	9500 2950 9400 2950
+Wire Wire Line
+	9400 2750 9600 2750
+Wire Wire Line
+	9600 2750 9600 3050
+Wire Wire Line
+	9600 3050 9400 3050
+Wire Wire Line
+	8200 2350 8100 2350
+Wire Wire Line
+	8100 2350 8100 2750
+Wire Wire Line
+	8100 2750 8200 2750
+Wire Wire Line
+	8200 2450 8000 2450
+Wire Wire Line
+	8000 2450 8000 2850
+Wire Wire Line
+	8000 2850 8200 2850
+Wire Wire Line
+	8000 2850 7700 2850
+Connection ~ 8000 2850
+Wire Wire Line
+	8100 2750 7700 2750
+Connection ~ 8100 2750
+Wire Wire Line
+	8200 2550 7900 2550
+Wire Wire Line
+	8200 2950 7900 2950
+Wire Wire Line
+	7900 2550 7900 2950
+Connection ~ 7900 2950
+Wire Wire Line
+	7900 2950 7700 2950
+Text Label 7700 2950 0    50   ~ 0
+ENA
+Text Label 7700 2750 0    50   ~ 0
+IN1
+Text Label 7700 2850 0    50   ~ 0
+IN2
+Wire Wire Line
+	8500 3550 8500 3650
+Wire Wire Line
+	8500 3650 8600 3650
+Wire Wire Line
+	8600 3650 8600 3550
+$Comp
+L Device:R R?
+U 1 1 5CB41D4B
+P 8500 3900
+F 0 "R?" H 8570 3946 50  0000 L CNN
+F 1 "R" H 8570 3855 50  0000 L CNN
+F 2 "" V 8430 3900 50  0001 C CNN
+F 3 "~" H 8500 3900 50  0001 C CNN
+	1    8500 3900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8500 3750 8500 3650
+Connection ~ 8500 3650
+Wire Wire Line
+	8500 4050 8500 4150
+Wire Wire Line
+	8500 4150 8800 4150
+Wire Wire Line
+	8800 4150 8800 3550
+$Comp
+L power:GND #PWR?
+U 1 1 5CB43024
+P 8800 4200
+F 0 "#PWR?" H 8800 3950 50  0001 C CNN
+F 1 "GND" V 8805 4072 50  0000 R CNN
+F 2 "" H 8800 4200 50  0001 C CNN
+F 3 "" H 8800 4200 50  0001 C CNN
+	1    8800 4200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8800 4200 8800 4150
+Connection ~ 8800 4150
+Wire Wire Line
+	9600 3050 9950 3050
+Connection ~ 9600 3050
+Wire Wire Line
+	9500 2950 9950 2950
+Connection ~ 9500 2950
+Text Label 9950 2950 2    50   ~ 0
+MOTA
+Text Label 9950 3050 2    50   ~ 0
+MOTB
+Wire Wire Line
+	8800 1850 8800 2150
+Text Label 8800 1850 3    50   ~ 0
+5VDC
+Wire Wire Line
+	8900 2150 8900 1850
+Text Label 8900 1850 3    50   ~ 0
+12VDC
+$Comp
+L power:GND #PWR?
+U 1 1 5CB46DE3
+P 2800 4000
+F 0 "#PWR?" H 2800 3750 50  0001 C CNN
+F 1 "GND" H 2805 3827 50  0000 C CNN
+F 2 "" H 2800 4000 50  0001 C CNN
+F 3 "" H 2800 4000 50  0001 C CNN
+	1    2800 4000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2800 4000 2800 3900
+Wire Wire Line
+	3200 3600 3500 3600
+Text Label 3500 3600 2    50   ~ 0
+DHT2
+$Comp
+L power:+5V #PWR?
+U 1 1 5CB46DEC
+P 2800 3250
+F 0 "#PWR?" H 2800 3100 50  0001 C CNN
+F 1 "+5V" H 2815 3423 50  0000 C CNN
+F 2 "" H 2800 3250 50  0001 C CNN
+F 3 "" H 2800 3250 50  0001 C CNN
+	1    2800 3250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2800 3250 2800 3300
+$Comp
+L dht11:DHT11 U?
+U 1 1 5CB46DF3
+P 2900 3600
+F 0 "U?" H 2670 3646 50  0000 R CNN
+F 1 "DHT11" H 2670 3555 50  0000 R CNN
+F 2 "dth11:DHT11" H 3050 3850 50  0001 C CNN
+F 3 "http://akizukidenshi.com/download/ds/aosong/DHT11.pdf" H 3050 3850 50  0001 C CNN
+	1    2900 3600
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC

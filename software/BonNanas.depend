@@ -1,0 +1,339 @@
+# depslib dependency file v1.0
+1553039102 source:d:\projects\bonnanas\software\core\bsp\unicon\drivers\adc.c
+	"defs.h"
+	"adc.h"
+	"unicon.h"
+
+1555275286 d:\projects\bonnanas\software\core\inc\defs.h
+	<stdint.h>
+	<stdbool.h>
+	<string.h>
+	<stdlib.h>
+	"stm32_assert.h"
+	"main.h"
+
+1555275530 d:\projects\bonnanas\software\core\inc\stm32_assert.h
+
+1555275530 d:\projects\bonnanas\software\core\inc\main.h
+	"stm32f0xx_ll_crs.h"
+	"stm32f0xx_ll_rcc.h"
+	"stm32f0xx_ll_bus.h"
+	"stm32f0xx_ll_system.h"
+	"stm32f0xx_ll_exti.h"
+	"stm32f0xx_ll_cortex.h"
+	"stm32f0xx_ll_utils.h"
+	"stm32f0xx_ll_pwr.h"
+	"stm32f0xx_ll_dma.h"
+	"stm32f0xx_ll_gpio.h"
+	"stm32_assert.h"
+
+1523694476 d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\inc\stm32f0xx_ll_adc.h
+	"stm32f0xx.h"
+
+1523694474 d:\projects\bonnanas\software\drivers\cmsis\device\st\stm32f0xx\include\stm32f0xx.h
+	"stm32f030x6.h"
+	"stm32f030x8.h"
+	"stm32f031x6.h"
+	"stm32f038xx.h"
+	"stm32f042x6.h"
+	"stm32f048xx.h"
+	"stm32f051x8.h"
+	"stm32f058xx.h"
+	"stm32f070x6.h"
+	"stm32f070xb.h"
+	"stm32f071xb.h"
+	"stm32f072xb.h"
+	"stm32f078xx.h"
+	"stm32f091xc.h"
+	"stm32f098xx.h"
+	"stm32f030xc.h"
+	"stm32f0xx_hal.h"
+
+1523694474 d:\projects\bonnanas\software\drivers\cmsis\device\st\stm32f0xx\include\stm32f030x6.h
+	"core_cm0.h"
+	"system_stm32f0xx.h"
+	<stdint.h>
+
+1523694476 d:\projects\bonnanas\software\drivers\cmsis\include\core_cm0.h
+	<stdint.h>
+	"core_cmInstr.h"
+	"core_cmFunc.h"
+
+1523694476 d:\projects\bonnanas\software\drivers\cmsis\include\core_cminstr.h
+	"cmsis_armcc.h"
+	"cmsis_armcc_V6.h"
+	"cmsis_gcc.h"
+	<cmsis_iar.h>
+	<cmsis_ccs.h>
+	<cmsis_csm.h>
+
+1523694476 d:\projects\bonnanas\software\drivers\cmsis\include\cmsis_armcc.h
+
+1523694476 d:\projects\bonnanas\software\drivers\cmsis\include\cmsis_armcc_v6.h
+
+1523694476 d:\projects\bonnanas\software\drivers\cmsis\include\cmsis_gcc.h
+
+1523694476 d:\projects\bonnanas\software\drivers\cmsis\include\core_cmfunc.h
+	"cmsis_armcc.h"
+	"cmsis_armcc_V6.h"
+	"cmsis_gcc.h"
+	<cmsis_iar.h>
+	<cmsis_ccs.h>
+	<cmsis_csm.h>
+
+1523694474 d:\projects\bonnanas\software\drivers\cmsis\device\st\stm32f0xx\include\system_stm32f0xx.h
+
+1523694474 d:\projects\bonnanas\software\drivers\cmsis\device\st\stm32f0xx\include\stm32f030x8.h
+	"core_cm0.h"
+	"system_stm32f0xx.h"
+	<stdint.h>
+
+1523694474 d:\projects\bonnanas\software\drivers\cmsis\device\st\stm32f0xx\include\stm32f031x6.h
+	"core_cm0.h"
+	"system_stm32f0xx.h"
+	<stdint.h>
+
+1523694474 d:\projects\bonnanas\software\drivers\cmsis\device\st\stm32f0xx\include\stm32f038xx.h
+	"core_cm0.h"
+	"system_stm32f0xx.h"
+	<stdint.h>
+
+1523694474 d:\projects\bonnanas\software\drivers\cmsis\device\st\stm32f0xx\include\stm32f042x6.h
+	"core_cm0.h"
+	"system_stm32f0xx.h"
+	<stdint.h>
+
+1523694474 d:\projects\bonnanas\software\drivers\cmsis\device\st\stm32f0xx\include\stm32f048xx.h
+	"core_cm0.h"
+	"system_stm32f0xx.h"
+	<stdint.h>
+
+1523694474 d:\projects\bonnanas\software\drivers\cmsis\device\st\stm32f0xx\include\stm32f051x8.h
+	"core_cm0.h"
+	"system_stm32f0xx.h"
+	<stdint.h>
+
+1523694474 d:\projects\bonnanas\software\drivers\cmsis\device\st\stm32f0xx\include\stm32f058xx.h
+	"core_cm0.h"
+	"system_stm32f0xx.h"
+	<stdint.h>
+
+1523694474 d:\projects\bonnanas\software\drivers\cmsis\device\st\stm32f0xx\include\stm32f070x6.h
+	"core_cm0.h"
+	"system_stm32f0xx.h"
+	<stdint.h>
+
+1523694474 d:\projects\bonnanas\software\drivers\cmsis\device\st\stm32f0xx\include\stm32f070xb.h
+	"core_cm0.h"
+	"system_stm32f0xx.h"
+	<stdint.h>
+
+1523694474 d:\projects\bonnanas\software\drivers\cmsis\device\st\stm32f0xx\include\stm32f071xb.h
+	"core_cm0.h"
+	"system_stm32f0xx.h"
+	<stdint.h>
+
+1523694474 d:\projects\bonnanas\software\drivers\cmsis\device\st\stm32f0xx\include\stm32f072xb.h
+	"core_cm0.h"
+	"system_stm32f0xx.h"
+	<stdint.h>
+
+1523694474 d:\projects\bonnanas\software\drivers\cmsis\device\st\stm32f0xx\include\stm32f078xx.h
+	"core_cm0.h"
+	"system_stm32f0xx.h"
+	<stdint.h>
+
+1523694474 d:\projects\bonnanas\software\drivers\cmsis\device\st\stm32f0xx\include\stm32f091xc.h
+	"core_cm0.h"
+	"system_stm32f0xx.h"
+	<stdint.h>
+
+1523694474 d:\projects\bonnanas\software\drivers\cmsis\device\st\stm32f0xx\include\stm32f098xx.h
+	"core_cm0.h"
+	"system_stm32f0xx.h"
+	<stdint.h>
+
+1523694474 d:\projects\bonnanas\software\drivers\cmsis\device\st\stm32f0xx\include\stm32f030xc.h
+	"core_cm0.h"
+	"system_stm32f0xx.h"
+	<stdint.h>
+
+1523694476 d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\inc\stm32f0xx_hal.h
+	"stm32f0xx_hal_conf.h"
+
+1523694476 d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\inc\stm32f0xx_ll_crs.h
+	"stm32f0xx.h"
+
+1523694476 d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\inc\stm32f0xx_ll_rcc.h
+	"stm32f0xx.h"
+
+1523694476 d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\inc\stm32f0xx_ll_bus.h
+	"stm32f0xx.h"
+
+1523694476 d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\inc\stm32f0xx_ll_system.h
+	"stm32f0xx.h"
+
+1523694476 d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\inc\stm32f0xx_ll_exti.h
+	"stm32f0xx.h"
+
+1523694476 d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\inc\stm32f0xx_ll_cortex.h
+	"stm32f0xx.h"
+
+1523694476 d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\inc\stm32f0xx_ll_utils.h
+	"stm32f0xx.h"
+
+1523694476 d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\inc\stm32f0xx_ll_pwr.h
+	"stm32f0xx.h"
+
+1523694476 d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\inc\stm32f0xx_ll_dma.h
+	"stm32f0xx.h"
+
+1523694476 d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\inc\stm32f0xx_ll_rtc.h
+	"stm32f0xx.h"
+
+1523694476 d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\inc\stm32f0xx_ll_tim.h
+	"stm32f0xx.h"
+
+1523694476 d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\inc\stm32f0xx_ll_gpio.h
+	"stm32f0xx.h"
+
+1548183015 d:\projects\bonnanas\software\core\bsp\unicon\drivers\adc.h
+
+1555275369 d:\projects\bonnanas\software\core\bsp\unicon\unicon.h
+	"defs.h"
+	"io.h"
+
+1546846430 d:\projects\bonnanas\software\core\inc\defaults.h
+
+1546873610 d:\projects\bonnanas\software\core\bsp\unicon\drivers\io.h
+
+1548442730 source:d:\projects\bonnanas\software\core\bsp\unicon\drivers\dma.c
+	"defs.h"
+	"dma.h"
+	"usart.h"
+
+1548274098 d:\projects\bonnanas\software\core\bsp\unicon\drivers\dma.h
+
+1551295728 d:\projects\bonnanas\software\core\bsp\unicon\drivers\usart.h
+	"defs.h"
+
+1551912555 source:d:\projects\bonnanas\software\core\bsp\unicon\drivers\iic.c
+	"iic.h"
+
+1551910478 d:\projects\bonnanas\software\core\bsp\unicon\drivers\iic.h
+	"defs.h"
+
+1546612890 source:d:\projects\bonnanas\software\core\bsp\unicon\drivers\io.c
+	"defs.h"
+	"io.h"
+
+1548274098 source:d:\projects\bonnanas\software\core\bsp\unicon\drivers\pwm.c
+	"defs.h"
+	"pwm.h"
+
+1548274098 d:\projects\bonnanas\software\core\bsp\unicon\drivers\pwm.h
+
+1547586409 source:d:\projects\bonnanas\software\core\bsp\unicon\drivers\rtc.c
+	"defs.h"
+	"rtc.h"
+
+1549146862 d:\projects\bonnanas\software\core\bsp\unicon\drivers\rtc.h
+
+1546953754 source:d:\projects\bonnanas\software\core\bsp\unicon\drivers\tim.c
+	"defs.h"
+	"tim.h"
+	"unicon.h"
+
+1548274098 d:\projects\bonnanas\software\core\bsp\unicon\drivers\tim.h
+	"pwm.h"
+
+1552253134 source:d:\projects\bonnanas\software\core\bsp\unicon\drivers\usart.c
+	"defs.h"
+	"usart.h"
+	"io.h"
+	"nextion.h"
+	"mbport.h"
+
+1555274731 source:d:\projects\bonnanas\software\core\bsp\unicon\unicon.c
+	<stdio.h>
+	"unicon.h"
+
+1509023696 source:d:\projects\bonnanas\software\core\src\system_stm32f0xx.c
+	"stm32f0xx.h"
+
+1523694476 source:d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\src\stm32f0xx_ll_adc.c
+	"stm32f0xx_ll_adc.h"
+	"stm32f0xx_ll_bus.h"
+	"stm32_assert.h"
+
+1523694476 source:d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\src\stm32f0xx_ll_dma.c
+	"stm32f0xx_ll_dma.h"
+	"stm32f0xx_ll_bus.h"
+	"stm32_assert.h"
+
+1523694476 source:d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\src\stm32f0xx_ll_exti.c
+	"stm32f0xx_ll_exti.h"
+	"stm32_assert.h"
+
+1523694476 source:d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\src\stm32f0xx_ll_gpio.c
+	"stm32f0xx_ll_gpio.h"
+	"stm32f0xx_ll_bus.h"
+	"stm32_assert.h"
+
+1523694476 source:d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\src\stm32f0xx_ll_i2c.c
+	"stm32f0xx_ll_i2c.h"
+	"stm32f0xx_ll_bus.h"
+	"stm32_assert.h"
+
+1523694476 d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\inc\stm32f0xx_ll_i2c.h
+	"stm32f0xx.h"
+
+1523694476 source:d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\src\stm32f0xx_ll_pwr.c
+	"stm32f0xx_ll_pwr.h"
+	"stm32f0xx_ll_bus.h"
+
+1523694476 source:d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\src\stm32f0xx_ll_rcc.c
+	"stm32f0xx_ll_rcc.h"
+	"stm32_assert.h"
+
+1523694476 source:d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\src\stm32f0xx_ll_rtc.c
+	"stm32f0xx_ll_rtc.h"
+	"stm32f0xx_ll_cortex.h"
+	"stm32_assert.h"
+
+1523694476 source:d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\src\stm32f0xx_ll_tim.c
+	"stm32f0xx_ll_tim.h"
+	"stm32f0xx_ll_bus.h"
+	"stm32_assert.h"
+
+1523694476 source:d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\src\stm32f0xx_ll_usart.c
+	"stm32f0xx_ll_usart.h"
+	"stm32f0xx_ll_rcc.h"
+	"stm32f0xx_ll_bus.h"
+	"stm32_assert.h"
+
+1523694476 d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\inc\stm32f0xx_ll_usart.h
+	"stm32f0xx.h"
+
+1523694476 source:d:\projects\bonnanas\software\drivers\stm32f0xx_hal_driver\src\stm32f0xx_ll_utils.c
+	"stm32f0xx_ll_rcc.h"
+	"stm32f0xx_ll_utils.h"
+	"stm32f0xx_ll_system.h"
+	"stm32_assert.h"
+
+1539925100 source:d:\projects\bonnanas\software\startup\startup_stm32f0xx.s
+
+1555274613 source:d:\projects\bonnanas\software\core\src\main.c
+	"main.h"
+	<stdio.h>
+	"unicon.h"
+
+1555275073 source:d:\projects\bonnanas\software\core\src\stm32f0xx_it.c
+	"main.h"
+	"stm32f0xx_it.h"
+	"unicon.h"
+	"mbport.h"
+
+1555275073 d:\projects\bonnanas\software\core\inc\stm32f0xx_it.h
+	"stm32f0xx_ll_tim.h"
+
