@@ -92,7 +92,6 @@
 			<Add option="-eb_start_files" />
 			<Add option="-lm" />
 		</Linker>
-		<Unit filename="Core\bsp\unicon\drivers\common\datetime.h" />
 		<Unit filename="Core\bsp\unicon\drivers\io.c">
 			<Option compilerVar="CC" />
 		</Unit>
