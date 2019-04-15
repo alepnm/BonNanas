@@ -1,11 +1,115 @@
 EESchema-LIBRARY Version 2.4
 #encoding utf-8
 #
-# Device_R
+# Connector_Generic:Conn_01x03
 #
-DEF Device_R R 0 0 N Y 1 F N
+DEF Connector_Generic:Conn_01x03 J 0 40 Y N 1 F N
+F0 "J" 0 200 50 H V C CNN
+F1 "Connector_Generic:Conn_01x03" 0 -200 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Connector*:*_1x??_*
+$ENDFPLIST
+DRAW
+S -50 -95 0 -105 1 1 6 N
+S -50 5 0 -5 1 1 6 N
+S -50 105 0 95 1 1 6 N
+S -50 150 50 -150 1 1 10 f
+X Pin_1 1 -200 100 150 R 50 50 1 1 P
+X Pin_2 2 -200 0 150 R 50 50 1 1 P
+X Pin_3 3 -200 -100 150 R 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Connector_Generic:Conn_01x04
+#
+DEF Connector_Generic:Conn_01x04 J 0 40 Y N 1 F N
+F0 "J" 0 200 50 H V C CNN
+F1 "Connector_Generic:Conn_01x04" 0 -300 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Connector*:*_1x??_*
+$ENDFPLIST
+DRAW
+S -50 -195 0 -205 1 1 6 N
+S -50 -95 0 -105 1 1 6 N
+S -50 5 0 -5 1 1 6 N
+S -50 105 0 95 1 1 6 N
+S -50 150 50 -250 1 1 10 f
+X Pin_1 1 -200 100 150 R 50 50 1 1 P
+X Pin_2 2 -200 0 150 R 50 50 1 1 P
+X Pin_3 3 -200 -100 150 R 50 50 1 1 P
+X Pin_4 4 -200 -200 150 R 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Device:C
+#
+DEF Device:C C 0 10 N Y 1 F N
+F0 "C" 25 100 50 H V L CNN
+F1 "Device:C" 25 -100 50 H V L CNN
+F2 "" 38 -150 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ C_*
+$ENDFPLIST
+DRAW
+P 2 0 1 20 -80 -30 80 -30 N
+P 2 0 1 20 -80 30 80 30 N
+X ~ 1 0 150 110 D 50 50 1 1 P
+X ~ 2 0 -150 110 U 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Device:CP
+#
+DEF Device:CP C 0 10 N Y 1 F N
+F0 "C" 25 100 50 H V L CNN
+F1 "Device:CP" 25 -100 50 H V L CNN
+F2 "" 38 -150 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ CP_*
+$ENDFPLIST
+DRAW
+S -90 20 90 40 0 1 0 N
+S 90 -20 -90 -40 0 1 0 F
+P 2 0 1 0 -70 90 -30 90 N
+P 2 0 1 0 -50 110 -50 70 N
+X ~ 1 0 150 110 D 50 50 1 1 P
+X ~ 2 0 -150 110 U 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Device:D
+#
+DEF Device:D D 0 40 N N 1 F N
+F0 "D" 0 100 50 H V C CNN
+F1 "Device:D" 0 -100 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ TO-???*
+ *_Diode_*
+ *SingleDiode*
+ D_*
+$ENDFPLIST
+DRAW
+P 2 0 1 8 -50 50 -50 -50 N
+P 2 0 1 0 50 0 -50 0 N
+P 4 0 1 8 50 50 50 -50 -50 0 50 50 N
+X K 1 -150 0 100 R 50 50 1 1 P
+X A 2 150 0 100 L 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Device:R
+#
+DEF Device:R R 0 0 N Y 1 F N
 F0 "R" 80 0 50 V V C CNN
-F1 "Device_R" 0 0 50 V V C CNN
+F1 "Device:R" 0 0 50 V V C CNN
 F2 "" -70 0 50 V I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -18,11 +122,31 @@ X ~ 2 0 -150 50 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# Driver_Motor_L298HN
+# Device:R_POT_TRIM
 #
-DEF Driver_Motor_L298HN U 0 40 Y Y 1 F N
+DEF Device:R_POT_TRIM RV 0 40 Y N 1 F N
+F0 "RV" -175 0 50 V V C CNN
+F1 "Device:R_POT_TRIM" -100 0 50 V V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Potentiometer*
+$ENDFPLIST
+DRAW
+S 40 100 -40 -100 0 1 10 N
+P 2 0 1 0 60 30 60 -30 N
+P 2 0 1 0 100 0 60 0 N
+X 1 1 0 150 50 D 50 50 1 1 P
+X 2 2 150 0 50 L 50 50 1 1 P
+X 3 3 0 -150 50 U 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Driver_Motor:L298HN
+#
+DEF Driver_Motor:L298HN U 0 40 Y Y 1 F N
 F0 "U" -400 650 50 H V R CNN
-F1 "Driver_Motor_L298HN" 500 650 50 H V R CNN
+F1 "Driver_Motor:L298HN" 500 650 50 H V R CNN
 F2 "Package_TO_SOT_THT:TO-220-15_P2.54x2.54mm_StaggerOdd_Lead4.58mm_Vertical" 50 -650 50 H I L CNN
 F3 "" 150 250 50 H I C CNN
 $FPLIST
@@ -48,26 +172,40 @@ X Vss 9 0 700 100 D 50 50 1 1 W
 ENDDRAW
 ENDDEF
 #
-# dht11_DHT11
+# mech:SW_TACT_6301
 #
-DEF dht11_DHT11 U 0 40 Y Y 1 F N
-F0 "U" 150 250 50 H V C CNN
-F1 "dht11_DHT11" 100 -250 50 H V C CNN
-F2 "dth11:DHT11" 150 250 50 H I C CNN
-F3 "" 150 250 50 H I C CNN
+DEF mech:SW_TACT_6301 SW 0 40 N N 1 F N
+F0 "SW" 50 100 50 H V L CNN
+F1 "mech:SW_TACT_6301" 0 -60 50 H V C CNN
+F2 "mech:SW_TACT6301" 50 -150 50 H I C CNN
+F3 "" 0 200 50 H I C CNN
+F4 "ZJGM011" 150 200 60 H I C CNN "ventcode"
+F5 "-" 250 300 60 H I C CNN "Nominalas"
+F6 "0.12" 350 400 60 H I C CNN "Kaina"
+F7 "-" 450 500 60 H I C CNN "Korpusas"
+F8 "5.5" 550 600 60 H I C CNN "Aukstis"
+F9 "TACTSW6301EA" 650 700 60 H I C CNN "Marke"
+F10 "Mygtukas" 750 800 60 H I C CNN "Pavadinimas"
+F11 "M/TACTSW6301EA-250-R-L/SMD1 -DTSM32N" 850 900 60 H I C CNN "Gamintojo Kodas"
+F12 "-" 950 1000 60 H I C CNN "Nuoroda"
+F13 "-" 1050 1100 60 H I C CNN "Korpuso tipas"
+F14 "-" 1150 1200 60 H I C CNN "Parametras"
+F15 "-" 1250 1300 60 H I C CNN "Komentaras"
 DRAW
-S -200 200 200 -200 0 1 10 N
-X VCC 1 -100 300 100 D 50 50 1 1 W
-X IO 2 300 0 100 L 50 50 1 1 B
-X GND 4 -100 -300 100 U 50 50 1 1 W
+C -80 0 20 0 1 0 N
+C 80 0 20 0 1 0 N
+P 2 0 1 0 0 50 0 120 N
+P 2 0 1 0 100 50 -100 50 N
+X 1 1 -200 0 100 R 50 50 0 1 P
+X 2 2 200 0 100 L 50 50 0 1 P
 ENDDRAW
 ENDDEF
 #
-# power_+5V
+# power:+5V
 #
-DEF power_+5V #PWR 0 0 Y Y 1 F P
+DEF power:+5V #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -150 50 H I C CNN
-F1 "power_+5V" 0 140 50 H V C CNN
+F1 "power:+5V" 0 140 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -78,11 +216,11 @@ X +5V 1 0 0 0 U 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# power_GND
+# power:GND
 #
-DEF power_GND #PWR 0 0 Y Y 1 F P
+DEF power:GND #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -250 50 H I C CNN
-F1 "power_GND" 0 -150 50 H V C CNN
+F1 "power:GND" 0 -150 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -91,11 +229,26 @@ X GND 1 0 0 0 D 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# unicon_unicon_v1
+# valdiklis-rescue:DHT11-dht11
 #
-DEF unicon_unicon_v1 M 0 40 Y Y 1 F N
+DEF valdiklis-rescue:DHT11-dht11 U 0 40 Y Y 1 F N
+F0 "U" 150 250 50 H V C CNN
+F1 "valdiklis-rescue:DHT11-dht11" 100 -250 50 H V C CNN
+F2 "dth11:DHT11" 150 250 50 H I C CNN
+F3 "" 150 250 50 H I C CNN
+DRAW
+S -200 200 200 -200 0 1 10 N
+X VCC 1 -100 300 100 D 50 50 1 1 W
+X IO 2 300 0 100 L 50 50 1 1 B
+X GND 4 -100 -300 100 U 50 50 1 1 W
+ENDDRAW
+ENDDEF
+#
+# valdiklis-rescue:unicon_v1-unicon
+#
+DEF valdiklis-rescue:unicon_v1-unicon M 0 40 Y Y 1 F N
 F0 "M" -500 1350 50 H V C CNN
-F1 "unicon_unicon_v1" 250 1350 50 H V C CNN
+F1 "valdiklis-rescue:unicon_v1-unicon" 250 1350 50 H V C CNN
 F2 "unicon:unicon_v1" 0 3100 50 H I C CNN
 F3 "" 0 3100 50 H I C CNN
 DRAW
