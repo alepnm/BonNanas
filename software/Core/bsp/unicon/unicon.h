@@ -3,6 +3,8 @@
 
 #include "defs.h"
 #include "io.h"
+#include "adc.h"
+#include "usart.h"
 
 #define Delay_ms(x) LL_mDelay(x);
 
@@ -19,4 +21,8 @@ void UNI_SystemIRQ(void);
 void UNI_GetID(uint8_t* bufid);
 uint16_t UNI_GetFlashSize(void);
 uint8_t UNI_CheckUID(uint8_t* bufid);
+
+
+
+
 #endif /* UNICON_H_INCLUDED */

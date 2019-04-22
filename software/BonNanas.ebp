@@ -92,19 +92,39 @@
 			<Add option="-eb_start_files" />
 			<Add option="-lm" />
 		</Linker>
+		<Unit filename="Core\bsp\unicon\drivers\adc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Core\bsp\unicon\drivers\adc.h" />
 		<Unit filename="Core\bsp\unicon\drivers\io.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Core\bsp\unicon\drivers\io.h" />
+		<Unit filename="Core\bsp\unicon\drivers\one_wire.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Core\bsp\unicon\drivers\one_wire.h" />
+		<Unit filename="Core\bsp\unicon\drivers\usart.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Core\bsp\unicon\drivers\usart.h" />
 		<Unit filename="Core\bsp\unicon\unicon.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Core\bsp\unicon\unicon.h" />
 		<Unit filename="Core\Inc\defs.h" />
 		<Unit filename="Core\Inc\main.h" />
+		<Unit filename="Core\Inc\motor.h" />
 		<Unit filename="Core\Inc\stm32_assert.h" />
 		<Unit filename="Core\Inc\stm32f0xx_it.h" />
+		<Unit filename="Core\libs\ds18b20\ds18b20.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Core\libs\ds18b20\ds18b20.h" />
 		<Unit filename="Core\Src\main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Core\Src\motor.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Core\Src\stm32f0xx_it.c">

@@ -39,10 +39,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "unicon.h"
+#include "motor.h"
 
-#if defined(MODBUS_PORT)
-#include "mbport.h"
-#endif
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -75,6 +73,7 @@
 /* External variables --------------------------------------------------------*/
 volatile uint32_t timestamp = 0;
 
+extern SysData_TypeDef SysData;
 extern uint8_t AutoBackupToEepromFlag;
 /* USER CODE END 0 */
 
@@ -85,7 +84,7 @@ extern uint8_t AutoBackupToEepromFlag;
 /* USER CODE END EV */
 
 /******************************************************************************/
-/*           Cortex-M0 Processor Interruption and Exception Handlers          */ 
+/*           Cortex-M0 Processor Interruption and Exception Handlers          */
 /******************************************************************************/
 /**
   * @brief This function handles Non maskable interrupt.
@@ -152,8 +151,10 @@ void SysTick_Handler(void)
 
     UNI_SystemIRQ();
 
+    USART_TimerHandler();
+
   /* USER CODE END SysTick_IRQn 0 */
-  HAL_IncTick();
+
   /* USER CODE BEGIN SysTick_IRQn 1 */
 
   /* USER CODE END SysTick_IRQn 1 */
@@ -165,6 +166,19 @@ void SysTick_Handler(void)
 /* For the available peripheral interrupt handler names,                      */
 /* please refer to the startup file (startup_stm32f0xx.s).                    */
 /******************************************************************************/
+
+/**
+  * @brief This function handles USART1 global interrupt / USART1 wake-up interrupt through EXTI line 25.
+  */
+void USART1_IRQHandler(void)
+{
+  /* USER CODE BEGIN USART1_IRQn 0 */
+    USART_IRQ_Handler(PRIMARY_PORT);
+  /* USER CODE END USART1_IRQn 0 */
+  /* USER CODE BEGIN USART1_IRQn 1 */
+
+  /* USER CODE END USART1_IRQn 1 */
+}
 
 /* USER CODE BEGIN 1 */
 

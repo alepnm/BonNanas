@@ -6,9 +6,6 @@
 #define PRIMARY_PORT    0
 #define SECONDARY_PORT  1
 
-#define NEXTION_PORT    SECONDARY_PORT
-#define MODBUS_PORT     PRIMARY_PORT
-
 
 enum { BR2400 = 0, BR4800, BR9600, BR19200, BR38400, BR57600 };
 enum { USART_STATE_IDLE = 0, USART_STATE_BUSY, USART_STATE_ANSWER_WAITING, USART_STATE_DATA_TRANSMITTED, USART_STATE_DATA_RECEIVED };
@@ -48,6 +45,8 @@ extern PortRegister_TypeDef port_register[2u];
 extern const uint32_t baudrates[6u];
 
 extern uint8_t TxState;
+uint8_t RespondWaitingFlag;
+extern uint8_t NewMessageFlag;
 
 extern char* ptrPrimaryRxBuffer;
 extern char* ptrPrimaryTxBuffer;
@@ -60,7 +59,8 @@ void    USART_Send( uint8_t ucPORT, void* buf, size_t size_of_data );
 void    USART_Send_DMA(size_t len);
 void    USART_SendByte(uint8_t ucPORT, char data);
 void    USART_SendString( uint8_t ucPORT, const char* str );
-void    USART_IRQ_Handler(void);
+void    USART_IRQ_Handler(uint8_t port);
+void    USART_TimerHandler(void);
 
 void    USART_ClearRxBuffer(uint8_t ucPORT);
 uint8_t CheckBaudrate( uint32_t baudrate);

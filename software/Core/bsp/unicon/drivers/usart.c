@@ -1,11 +1,6 @@
 #include "defs.h"
 #include "usart.h"
 #include "io.h"
-#include "nextion.h"
-
-#if defined(MODBUS_PORT)
-    #include "mbport.h"
-#endif
 
 
 USART_TypeDef * usart_handle[2u] = {USART1, USART2};
@@ -13,7 +8,8 @@ PortConfig_TypeDef port_config[2u];
 PortRegister_TypeDef port_register[2u];
 
 uint8_t TxState = USART_STATE_IDLE;
-
+uint8_t RespondWaitingFlag = false;
+uint8_t NewMessageFlag = false;
 
 char* ptrPrimaryRxBuffer = port_register[PRIMARY_PORT].RxBuffer;
 char* ptrPrimaryTxBuffer = port_register[PRIMARY_PORT].TxBuffer;
@@ -134,47 +130,35 @@ uint8_t CheckBaudrate( uint32_t baudrate) {
 
 
 /*  */
-void USART_IRQ_Handler(void) {
+void USART_IRQ_Handler(uint8_t port) {
 
-    if( LL_USART_IsActiveFlag_RXNE(usart_handle[PRIMARY_PORT]) && LL_USART_IsEnabledIT_RXNE(usart_handle[PRIMARY_PORT]) ) {
+    if( LL_USART_IsActiveFlag_RXNE(usart_handle[port]) && LL_USART_IsEnabledIT_RXNE(usart_handle[port]) ) {
 
-        port_register[PRIMARY_PORT].ReceivedData = LL_USART_ReceiveData8(usart_handle[PRIMARY_PORT]);
+        port_register[port].ReceivedData = LL_USART_ReceiveData8(usart_handle[port]);
 
-        *(ptrPrimaryRxBuffer + port_register[PRIMARY_PORT].RxBufferIndex) = port_register[PRIMARY_PORT].ReceivedData;
+        *(port_register[port].RxBuffer + port_register[port].RxBufferIndex) = port_register[port].ReceivedData;
 
-        port_register[PRIMARY_PORT].RxBufferIndex++;
+        port_register[port].RxBufferIndex++;
 
-        port_register[PRIMARY_PORT].PortState = USART_STATE_ANSWER_WAITING;
+        port_register[port].PortState = USART_STATE_ANSWER_WAITING;
 
-        port_register[PRIMARY_PORT].PortTimer = 10;  //ms
-
-        //LED2_ON();
+        port_register[port].PortTimer = 10;
     }
-
-#if defined(MODBUS_PORT)
-    if( LL_USART_IsActiveFlag_RXNE(usart_handle[MODBUS_PORT]) && LL_USART_IsEnabledIT_RXNE(usart_handle[MODBUS_PORT]) ) {
-        (void)pxMBFrameCBByteReceived();
-    }
-
-    if( LL_USART_IsActiveFlag_TC(usart_handle[MODBUS_PORT]) && LL_USART_IsEnabledIT_TC(usart_handle[MODBUS_PORT]) ) {
-        (void)pxMBFrameCBTransmitterEmpty();
-    }
-#else
-
-    if( LL_USART_IsActiveFlag_RXNE(usart_handle[SECONDARY_PORT]) && LL_USART_IsEnabledIT_RXNE(usart_handle[SECONDARY_PORT]) ) {
-
-        port_register[SECONDARY_PORT].ReceivedData = LL_USART_ReceiveData8(usart_handle[SECONDARY_PORT]);
-
-        *(ptrSecondaryRxBuffer + port_register[SECONDARY_PORT].RxBufferIndex) = port_register[SECONDARY_PORT].ReceivedData;
-
-        port_register[SECONDARY_PORT].RxBufferIndex++;
-
-        port_register[SECONDARY_PORT].PortState = USART_STATE_ANSWER_WAITING;
-
-        port_register[SECONDARY_PORT].PortTimer = 10;  //ms
-    }
-#endif
 }
 
 
+/*  */
+void USART_TimerHandler(void) {
+
+    if(port_register[PRIMARY_PORT].PortTimer > 0) port_register[PRIMARY_PORT].PortTimer--;
+    else {
+        if(port_register[PRIMARY_PORT].PortState == USART_STATE_ANSWER_WAITING) {
+            port_register[PRIMARY_PORT].PortState = USART_STATE_IDLE;
+            port_register[PRIMARY_PORT].RxBufferIndex = 0;
+
+            RespondWaitingFlag = false;
+            NewMessageFlag = true;
+        }
+    }
+}
 

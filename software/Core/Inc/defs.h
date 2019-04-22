@@ -48,6 +48,44 @@ typedef enum { RES_OK = 0, RES_ERROR, RES_BUSY, RES_TIMEOUT, RES_BAD_PARAMS } eR
 
 /*  SYSTEM DEFAULTS */
 
+#define HUM_LEVEL_DEF   400
+
+
+typedef struct {
+
+    uint8_t         TestMode;
+    float           temper;
+
+    struct{
+        uint16_t    ch0;
+        uint16_t    ch1;
+        uint16_t    ch2;
+    }ADC_Data;
+
+    uint32_t        PauseTimer;
+    uint32_t        MotorTimer;
+    uint32_t        MotorDriverOffTimerCounter;
+    uint8_t         MotorState;
+    uint16_t        MotorSpeed;
+    uint8_t         WindowState;
+
+
+
+    uint8_t         MotorRunTime;
+    uint8_t         MotorDelayTime;
+    uint8_t         HighTemperature;
+    uint8_t         LowTemperature;
+    uint16_t        HighHumidity;
+
+}SysData_TypeDef;
+
+
+enum {Closed = 0, Opened}WindowState;
+enum {Stopped = 0, Run_WOpen, Run_WClose }MotorState;
+
+
+
+
 void SystickDelay_ms(uint32_t delay);
 void Delay_ms(uint32_t delay);
 

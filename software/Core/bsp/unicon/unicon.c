@@ -17,20 +17,15 @@ void UNI_Start(void) {
 
     LEDS_OFF();
 
+    ADC_Init();
+
+    USART_Config(PRIMARY_PORT, baudrates[BR9600], 8, USART_PAR_NONE);
 }
 
 
 /* sisteminiu procesu hendleris */
 void UNI_Process(void) {
 
-    static uint32_t delay = 0;
-
-    if(delay <= timestamp) {
-
-        delay = timestamp + 300;
-
-
-    }
 
 }
 

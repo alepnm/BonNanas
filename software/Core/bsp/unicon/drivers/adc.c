@@ -101,7 +101,8 @@ uint16_t ADC_ReadAnalog(uint32_t channel){
 
     LL_ADC_SetCommonPathInternalCh( __LL_ADC_COMMON_INSTANCE(ADC1), LL_ADC_PATH_INTERNAL_NONE );
 
-    return ADC_StartConversion( __LL_ADC_DECIMAL_NB_TO_CHANNEL(channel), LL_ADC_RESOLUTION_10B );
+    //return ADC_StartConversion( __LL_ADC_DECIMAL_NB_TO_CHANNEL(channel), LL_ADC_RESOLUTION_10B );
+    return ADC_StartConversion( channel, LL_ADC_RESOLUTION_10B );
 }
 
 
