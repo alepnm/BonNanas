@@ -1,1 +1,3 @@
 /software/Output
+/hardware/*.bak
+/hardware/*.kicad_pcb-bak

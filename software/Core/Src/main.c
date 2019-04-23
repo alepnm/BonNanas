@@ -142,7 +142,7 @@ int main(void) {
 
     SysData.TestMode = 0;
     SysData.HighTemperature = 25;
-    SysData.LowTemperature = 20;
+    SysData.LowTemperature = 22;
     SysData.HighHumidity = HUM_LEVEL_DEF;
     SysData.MotorSpeed = MOTOR_SPEED_DEF;
     SysData.MotorRunTime = MOTOR_DELAY_TIME_DEF;
@@ -702,7 +702,7 @@ static void NewMessageHandler(void) {
 
         uint8_t tmp = atoi(ptrPrimaryRxBuffer+9);
 
-        if(tmp < 10 || tmp > 28) {
+        if(tmp < 15 || tmp > 28) {
 
             sprintf(ptrPrimaryTxBuffer, "%s%02u%s", "BAD PARAM: LTEMP=", tmp, "\r\n");
             USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
@@ -830,7 +830,7 @@ static void NewMessageHandler(void) {
 
         uint8_t tmp = atoi(ptrPrimaryRxBuffer+13);
 
-        if(tmp < 2 || tmp > 10) {
+        if(tmp < 1 || tmp > 3) {
 
             sprintf(ptrPrimaryTxBuffer, "%s%u%s", "BAD PARAM: DELAYTIME=", tmp, "\r\n");
             USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
@@ -915,11 +915,8 @@ static void NewMessageHandler(void) {
                 SendOk();
             }else{
 
-                sprintf(ptrPrimaryTxBuffer, "%s", "Window is opened!\r\n");
-                USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
+                USART_SendString(PRIMARY_PORT, "Window is opened!\r\n");
                 while(RespondWaitingFlag);
-
-                USART_ClearRxBuffer(PRIMARY_PORT);
             }
 
             return;
@@ -935,11 +932,8 @@ static void NewMessageHandler(void) {
                 SendOk();
             }else{
 
-                sprintf(ptrPrimaryTxBuffer, "%s", "Window is closed!\r\n");
-                USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
+                USART_SendString(PRIMARY_PORT, "Window is closed!\r\n");
                 while(RespondWaitingFlag);
-
-                USART_ClearRxBuffer(PRIMARY_PORT);
             }
 
             return;
@@ -949,9 +943,7 @@ static void NewMessageHandler(void) {
     }
 
 
-
-    sprintf(ptrPrimaryTxBuffer, "%s", "BAD_CMD\r\n");
-    USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
+    USART_SendString(PRIMARY_PORT, "BAD_CMD\r\n");
     while(RespondWaitingFlag);
 
     USART_ClearRxBuffer(PRIMARY_PORT);
@@ -961,8 +953,7 @@ static void NewMessageHandler(void) {
 /*  */
 static void SendOk(void) {
 
-    sprintf(ptrPrimaryTxBuffer, "%s", "OK\r\n");
-    USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
+    USART_SendString(PRIMARY_PORT, "OK\r\n");
     while(RespondWaitingFlag);
 }
 

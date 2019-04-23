@@ -9,10 +9,7 @@
 static LL_GPIO_InitTypeDef GPIO_InitStruct = {0};
 
 
-
 static uint8_t dt[DS_QUANTITY][8];
-
-
 
 
 static uint8_t DS18B20_Reset(void);

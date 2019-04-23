@@ -1,6 +1,0 @@
-#ifndef DS18B20_H_INCLUDED
-#define DS18B20_H_INCLUDED
-
-
-
-#endif /* DS18B20_H_INCLUDED */
