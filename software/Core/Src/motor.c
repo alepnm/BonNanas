@@ -31,15 +31,22 @@ void L298_Process(SysData_TypeDef *self){
 
     if(self->MotorTimer < timestamp){
 
-        if(self->MotorState != Stopped) L298_MotorStop(self);
+        if(self->MotorState != Stopped){
 
-        if(self->MotorDriverOffTimerCounter < timestamp){
-            L298_ENA_Reset();
+            if(self->MotorState==Run_WClose) self->WindowState = Closed;
+            else self->WindowState = Opened;
+
+            self->PauseTimer = timestamp + self->MotorPauseTime * 1000;
+
+            L298_MotorStop(self);
+
+        }else{
+
+            if(self->MotorDriverOffTimerCounter < timestamp){
+                L298_ENA_Reset();
+            }
         }
-
     }
-
-
 }
 
 
@@ -47,19 +54,10 @@ void L298_Process(SysData_TypeDef *self){
 void L298_OpenWindow(SysData_TypeDef *self){
 
     if(self->WindowState == Opened || self->PauseTimer > timestamp){
-        L298_Process(self);
         return;
     }
 
-    if(self->MotorState == Run_WOpen){
-
-      if(self->MotorTimer < timestamp){
-            L298_MotorStop(self);
-            self->WindowState = Opened;
-            self->PauseTimer = timestamp + self->MotorDelayTime * 1000;
-      }
-
-    }else{
+    if(self->MotorState == Stopped){
 
         self->MotorState = Run_WOpen;
         L298_EnablePWM(self);
@@ -76,19 +74,10 @@ void L298_OpenWindow(SysData_TypeDef *self){
 void L298_CloseWindow(SysData_TypeDef *self){
 
     if(self->WindowState == Closed || self->PauseTimer > timestamp){
-        L298_Process(self);
         return;
     }
 
-    if(self->MotorState == Run_WClose){
-
-      if(self->MotorTimer < timestamp){
-            L298_MotorStop(self);
-            self->WindowState = Closed;
-            self->PauseTimer = timestamp + self->MotorDelayTime * 1000;
-      }
-
-    }else{
+    if(self->MotorState == Stopped){
 
         self->MotorState = Run_WClose;
         L298_EnablePWM(self);

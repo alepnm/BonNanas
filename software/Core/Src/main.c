@@ -59,7 +59,6 @@
 #define CH_POT_RV1      LL_ADC_CHANNEL_0
 #define CH_POT_RV2      LL_ADC_CHANNEL_1
 #define CH_HUMIDITY     LL_ADC_CHANNEL_5
-#define CH_TEMPERATURE  LL_ADC_CHANNEL_4
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -145,8 +144,8 @@ int main(void) {
     SysData.LowTemperature = 22;
     SysData.HighHumidity = HUM_LEVEL_DEF;
     SysData.MotorSpeed = MOTOR_SPEED_DEF;
-    SysData.MotorRunTime = MOTOR_DELAY_TIME_DEF;
-    SysData.MotorDelayTime = MOTOR_PAUSE_TIME_DEF;
+    SysData.MotorRunTime = MOTOR_RUNTIME_DEF;//MOTOR_DELAY_TIME_DEF;
+    SysData.MotorPauseTime = MOTOR_PAUSE_TIME_DEF;
 
     UNI_Start();
 
@@ -182,7 +181,6 @@ int main(void) {
             SysData.ADC_Data.ch2 = ADC_ReadAnalog(CH_HUMIDITY);
             Delay_ms(10);
 
-
             if(ds_delay == 0) {
 
                 ds_delay = 10;
@@ -197,10 +195,7 @@ int main(void) {
                 ds_delay--;
             }
 
-
             if(SysData.TestMode == 0) {
-
-                UNI_Process();
 
                 if(SysData.ADC_Data.ch2 >= SysData.HighHumidity) {
                     L298_CloseWindow(&SysData);
@@ -218,22 +213,22 @@ int main(void) {
                             L298_CloseWindow(&SysData);
                         }
 
-                        L298_Process(&SysData);
-
                         LED7_OFF();
                     }
                 }
             } else {
                 /* testas */
 
-                L298_Process(&SysData);
-
                 TestModeHandler(&SysData);
             }
+
+            L298_Process(&SysData);
+
+            UNI_Process();
+
+            LedHandler();
         }
 
-
-        LedHandler();
 
         if(NewMessageFlag) {
 
@@ -656,8 +651,9 @@ static void LedHandler(void) {
             if(SysData.WindowState) LED2_ON();
             else LED2_OFF();
 
-            if(LL_GPIO_IsInputPinSet(GPIOB, LL_GPIO_PIN_9) ) LED5_ON();
+            if( L298_ENA_CHECK() ) LED5_ON();
             else LED5_OFF();
+
         }
 
     }
@@ -681,9 +677,15 @@ static void NewMessageHandler(void) {
             return;
         }
 
-        SysData.HighTemperature = tmp;
-        USART_ClearRxBuffer(PRIMARY_PORT);
-        SendOk();
+        if(tmp <= SysData.LowTemperature){
+            sprintf(ptrPrimaryTxBuffer, "%s", "BAD PARAM: HTEMP<LTEMP\r\n");
+            USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
+            USART_ClearRxBuffer(PRIMARY_PORT);
+        }else{
+            SysData.HighTemperature = tmp;
+            SendOk();
+        }
+
         return;
     }
 
@@ -702,7 +704,7 @@ static void NewMessageHandler(void) {
 
         uint8_t tmp = atoi(ptrPrimaryRxBuffer+9);
 
-        if(tmp < 15 || tmp > 28) {
+        if(tmp < 15 || tmp > 25) {
 
             sprintf(ptrPrimaryTxBuffer, "%s%02u%s", "BAD PARAM: LTEMP=", tmp, "\r\n");
             USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
@@ -712,9 +714,15 @@ static void NewMessageHandler(void) {
             return;
         }
 
-        SysData.LowTemperature = tmp;
-        USART_ClearRxBuffer(PRIMARY_PORT);
-        SendOk();
+        if(tmp >= SysData.HighTemperature){
+            sprintf(ptrPrimaryTxBuffer, "%s", "BAD PARAM: LTEMP>HTEMP\r\n");
+            USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
+            USART_ClearRxBuffer(PRIMARY_PORT);
+        }else{
+            SysData.LowTemperature = tmp;
+            SendOk();
+        }
+
         return;
     }
 
@@ -826,13 +834,13 @@ static void NewMessageHandler(void) {
 
 
 
-    if( !strncmp(ptrPrimaryRxBuffer, "AT+DELAYTIME=", 13 )) {
+    if( !strncmp(ptrPrimaryRxBuffer, "AT+PAUSETIME=", 13 )) {
 
         uint8_t tmp = atoi(ptrPrimaryRxBuffer+13);
 
         if(tmp < 1 || tmp > 3) {
 
-            sprintf(ptrPrimaryTxBuffer, "%s%u%s", "BAD PARAM: DELAYTIME=", tmp, "\r\n");
+            sprintf(ptrPrimaryTxBuffer, "%s%u%s", "BAD PARAM: PAUSETIME=", tmp, "\r\n");
             USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
             while(RespondWaitingFlag);
 
@@ -840,15 +848,15 @@ static void NewMessageHandler(void) {
             return;
         }
 
-        SysData.MotorDelayTime = tmp;
+        SysData.MotorPauseTime = tmp;
         USART_ClearRxBuffer(PRIMARY_PORT);
         SendOk();
         return;
     }
 
-    if( !strncmp(ptrPrimaryRxBuffer, "AT+DELAYTIME?", 13 )) {
+    if( !strncmp(ptrPrimaryRxBuffer, "AT+PAUSETIME?", 13 )) {
 
-        sprintf(ptrPrimaryTxBuffer, "%s%u%s", "DELAYTIME=", SysData.MotorDelayTime, "\r\n");
+        sprintf(ptrPrimaryTxBuffer, "%s%u%s", "PAUSETIME=", SysData.MotorPauseTime, "\r\n");
         USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
         while(RespondWaitingFlag);
 
@@ -859,8 +867,15 @@ static void NewMessageHandler(void) {
 
     if( !strncmp(ptrPrimaryRxBuffer, "AT+INF", 6 )) {
 
-        sprintf(ptrPrimaryTxBuffer, "%s%02.02f%s%u%s", "TEMP=", SysData.temper, " HUM=", SysData.ADC_Data.ch2, "\r\n");
+        sprintf(ptrPrimaryTxBuffer, "%s%02.02f%s%u%s", "TEMP=", SysData.temper, "\r\nHUM=", SysData.ADC_Data.ch2, "\r\n");
         USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
+
+        sprintf(ptrPrimaryTxBuffer, "%s%u%s%u%s", "RV1=", SysData.ADC_Data.ch0, "\r\nRV2=", SysData.ADC_Data.ch1, "\r\n");
+        USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
+
+        sprintf(ptrPrimaryTxBuffer, "%s", "\r\n");
+        USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
+
         while(RespondWaitingFlag);
 
         USART_ClearRxBuffer(PRIMARY_PORT);

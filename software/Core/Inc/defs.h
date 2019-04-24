@@ -72,7 +72,7 @@ typedef struct {
 
 
     uint8_t         MotorRunTime;
-    uint8_t         MotorDelayTime;
+    uint8_t         MotorPauseTime;
     uint8_t         HighTemperature;
     uint8_t         LowTemperature;
     uint16_t        HighHumidity;
@@ -84,6 +84,12 @@ enum {Closed = 0, Opened}WindowState;
 enum {Stopped = 0, Run_WOpen, Run_WClose }MotorState;
 
 
+
+__STATIC_INLINE void Delay_us(__IO uint32_t us){
+
+    us *= (SystemCoreClock / 12000000);
+    while(us--) ;
+}
 
 
 void SystickDelay_ms(uint32_t delay);

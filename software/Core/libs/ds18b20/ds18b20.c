@@ -1,4 +1,5 @@
 
+#include "defs.h"
 #include "one_wire.h"
 #include "ds18b20.h"
 
