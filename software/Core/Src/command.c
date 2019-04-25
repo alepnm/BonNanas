@@ -236,6 +236,10 @@ void NewMessageHandler(void) {
         else sprintf(ptrPrimaryTxBuffer, "%s", "Driver Enabled\r\n");
         USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
 
+        if( SysData.TestMode ) sprintf(ptrPrimaryTxBuffer, "%s", "Controller in Test mode\r\n");
+        else sprintf(ptrPrimaryTxBuffer, "%s", "Controller in Normal mode\r\n");
+        USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
+
 
         // praleidziam eilute
         sprintf(ptrPrimaryTxBuffer, "%s", "\r\n");
@@ -349,3 +353,4 @@ void SendOk(void) {
     USART_SendString(PRIMARY_PORT, "OK\r\n");
     while(RespondWaitingFlag);
 }
+
