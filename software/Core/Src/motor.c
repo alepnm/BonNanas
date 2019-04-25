@@ -11,7 +11,7 @@ static void L298_EnablePWM(SysData_TypeDef *self);
 
 
 /*  */
-void L298_Init(SysData_TypeDef *self){
+void L298_Init(SysData_TypeDef *self) {
 
     L298_IN1_Set();
     L298_ENA_Set();
@@ -27,11 +27,11 @@ void L298_Init(SysData_TypeDef *self){
 
 
 /* variklio kontrole */
-void L298_Process(SysData_TypeDef *self){
+void L298_Process(SysData_TypeDef *self) {
 
-    if(self->MotorTimer < timestamp){
+    if(self->MotorTimer < timestamp) {
 
-        if(self->MotorState != Stopped){
+        if(self->MotorState != Stopped) {
 
             if(self->MotorState==Run_WClose) self->WindowState = Closed;
             else self->WindowState = Opened;
@@ -40,9 +40,9 @@ void L298_Process(SysData_TypeDef *self){
 
             L298_MotorStop(self);
 
-        }else{
+        } else {
 
-            if(self->MotorDriverOffTimerCounter < timestamp){
+            if(self->MotorDriverOffTimerCounter < timestamp) {
                 L298_ENA_Reset();
             }
         }// (self->MotorState != Stopped)
@@ -51,13 +51,13 @@ void L298_Process(SysData_TypeDef *self){
 
 
 /* atidarom langa */
-void L298_OpenWindow(SysData_TypeDef *self){
+void L298_OpenWindow(SysData_TypeDef *self) {
 
-    if(self->WindowState == Opened || self->PauseTimer > timestamp){
+    if(self->WindowState == Opened || self->PauseTimer > timestamp) {
         return;
     }
 
-    if(self->MotorState == Stopped){
+    if(self->MotorState == Stopped) {
 
         self->MotorState = Run_WOpen;
         L298_EnablePWM(self);
@@ -71,13 +71,13 @@ void L298_OpenWindow(SysData_TypeDef *self){
 
 
 /* uzdarom langa */
-void L298_CloseWindow(SysData_TypeDef *self){
+void L298_CloseWindow(SysData_TypeDef *self) {
 
-    if(self->WindowState == Closed || self->PauseTimer > timestamp){
+    if(self->WindowState == Closed || self->PauseTimer > timestamp) {
         return;
     }
 
-    if(self->MotorState == Stopped){
+    if(self->MotorState == Stopped) {
 
         self->MotorState = Run_WClose;
         L298_EnablePWM(self);
@@ -91,7 +91,7 @@ void L298_CloseWindow(SysData_TypeDef *self){
 
 
 /*  */
-void L298_MotorStop(SysData_TypeDef *self){
+void L298_MotorStop(SysData_TypeDef *self) {
 
     L298_IN1_Set();
 
@@ -106,7 +106,7 @@ void L298_MotorStop(SysData_TypeDef *self){
 
 
 /*  */
-static void L298_EnablePWM(SysData_TypeDef *self){
+static void L298_EnablePWM(SysData_TypeDef *self) {
 
     uint16_t speed = self->MotorSpeed;
 
@@ -117,7 +117,6 @@ static void L298_EnablePWM(SysData_TypeDef *self){
     LL_TIM_EnableCounter(TIM16);
     LL_TIM_EnableAllOutputs(TIM16);
     LL_TIM_CC_EnableChannel(TIM16, LL_TIM_CHANNEL_CH1);
-
 }
 
 

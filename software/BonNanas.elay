@@ -21,19 +21,19 @@
 			<Cursor1 position="29" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Core\bsp\unicon\drivers\usart.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Core\bsp\unicon\drivers\usart.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="2980" topLine="97" />
 		</Cursor>
 	</File>
-	<File name="Core\bsp\unicon\drivers\usart.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Core\bsp\unicon\drivers\usart.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1598" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Core\bsp\unicon\unicon.c" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Core\bsp\unicon\unicon.c" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="267" topLine="0" />
+			<Cursor1 position="348" topLine="3" />
 		</Cursor>
 	</File>
 	<File name="Core\bsp\unicon\unicon.h" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -41,19 +41,24 @@
 			<Cursor1 position="127" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Core\Inc\defs.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Core\Inc\command.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1834" topLine="26" />
+			<Cursor1 position="56" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Core\Inc\defs.h" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="52" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="Core\Inc\main.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2380" topLine="64" />
+			<Cursor1 position="3688" topLine="85" />
 		</Cursor>
 	</File>
-	<File name="Core\Inc\motor.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Core\Inc\motor.h" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1022" topLine="0" />
+			<Cursor1 position="837" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="Core\Inc\stm32f0xx_it.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -61,24 +66,29 @@
 			<Cursor1 position="834" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Core\libs\ds18b20\ds18b20.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Core\libs\ds18b20\ds18b20.c" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="19" topLine="117" />
+			<Cursor1 position="3134" topLine="128" />
 		</Cursor>
 	</File>
-	<File name="Core\libs\ds18b20\ds18b20.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Core\libs\ds18b20\ds18b20.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="532" topLine="0" />
+			<Cursor1 position="234" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Core\Src\main.c" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Core\Src\command.c" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="27210" topLine="852" />
+			<Cursor1 position="105" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Core\Src\motor.c" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Core\Src\main.c" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="852" topLine="12" />
+			<Cursor1 position="30659" topLine="993" />
+		</Cursor>
+	</File>
+	<File name="Core\Src\motor.c" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2602" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="Core\Src\stm32f0xx_it.c" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -116,9 +126,9 @@
 			<Cursor1 position="9637" topLine="113" />
 		</Cursor>
 	</File>
-	<File name="startup\startup_stm32f0xx.S" open="1" top="1" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="startup\startup_stm32f0xx.S" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="4056" topLine="73" />
+			<Cursor1 position="3178" topLine="73" />
 		</Cursor>
 	</File>
 </EmBitz_layout_file>

@@ -48,9 +48,6 @@ typedef enum { RES_OK = 0, RES_ERROR, RES_BUSY, RES_TIMEOUT, RES_BAD_PARAMS } eR
 
 /*  SYSTEM DEFAULTS */
 
-#define HUM_LEVEL_DEF   400
-
-
 typedef struct {
 
     uint8_t         TestMode;

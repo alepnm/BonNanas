@@ -112,6 +112,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Core\bsp\unicon\unicon.h" />
+		<Unit filename="Core\Inc\command.h" />
 		<Unit filename="Core\Inc\defs.h" />
 		<Unit filename="Core\Inc\main.h" />
 		<Unit filename="Core\Inc\motor.h" />
@@ -121,6 +122,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Core\libs\ds18b20\ds18b20.h" />
+		<Unit filename="Core\Src\command.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="Core\Src\main.c">
 			<Option compilerVar="CC" />
 		</Unit>
