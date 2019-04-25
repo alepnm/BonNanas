@@ -4,6 +4,19 @@
 #include "ds18b20.h"
 
 
+#define DS_CMD_READ_ROM         0x33
+#define DS_CMD_MATCH_ROM        0x55
+#define DS_CMD_SKIP_ROM         0xCC
+#define DS_CMD_SEARCH_ROM       0xF0
+#define DS_CMD_ALARM_SEARCH     0xEC
+#define DS_CMD_CONVERT_T        0x44
+#define DS_CMD_READ_STRATCHPAD  0xBE
+#define DS_CMD_WRITE_STRATCHPAD 0x4E
+#define DS_CMD_COPY_STRATCHPAD  0x48
+#define DS_CMD_RECALL_E2        0xB8
+#define DS_CMD_DEAD_PS          0xB4
+
+
 #define DS_QUANTITY     3
 
 
@@ -37,12 +50,12 @@ uint8_t DS18B20_Init(uint8_t mode) {
 
     if(DS18B20_Reset()) return 1;
 
-    if( mode==SKIP_ROM ) {
+    if( mode==DS_MODE_SKIP_ROM ) {
 
-        DS18B20_WriteByte(0xCC);    // Skip ROM
+        DS18B20_WriteByte(DS_CMD_SKIP_ROM);
     }
 
-    DS18B20_WriteByte(0x4E);    // Write stratchpad
+    DS18B20_WriteByte(DS_CMD_WRITE_STRATCHPAD);
 
     DS18B20_WriteByte(0x64);    // TH register = 100C
     DS18B20_WriteByte(0x9E);    // TL register = -30C
@@ -133,12 +146,12 @@ void DS18B20_MeasureTemperCmd(uint8_t dev, uint8_t mode) {
 
     DS18B20_Reset();
 
-    if(mode==SKIP_ROM) {
+    if(mode==DS_MODE_SKIP_ROM) {
 
-        DS18B20_WriteByte(0xCC);    // Skip ROM
+        DS18B20_WriteByte(DS_CMD_SKIP_ROM);
     }
 
-    DS18B20_WriteByte(0x44);    // Convert T
+    DS18B20_WriteByte(DS_CMD_CONVERT_T);
 }
 
 
@@ -150,12 +163,12 @@ void DS18B20_ReadStratchpad(uint8_t dev, uint8_t mode) {
 
     DS18B20_Reset();
 
-    if(mode==SKIP_ROM) {
+    if(mode==DS_MODE_SKIP_ROM) {
 
-        DS18B20_WriteByte(0xCC);    // Skip ROM
+        DS18B20_WriteByte(DS_CMD_SKIP_ROM);
     }
 
-    DS18B20_WriteByte(0xBE);    // Read stratchpad
+    DS18B20_WriteByte(DS_CMD_READ_STRATCHPAD);
 
     for(i=0; i<8; i++) {
 

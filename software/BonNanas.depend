@@ -550,7 +550,7 @@
 	"adc.h"
 	"unicon.h"
 
-1555998225 c:\working\git\bonnanas\software\core\inc\defs.h
+1556178222 c:\working\git\bonnanas\software\core\inc\defs.h
 	<stdint.h>
 	<stdbool.h>
 	<string.h>
@@ -936,7 +936,7 @@
 	"adc.h"
 	"usart.h"
 
-1555307983 c:\working\git\bonnanas\software\core\bsp\unicon\drivers\io.h
+1556172430 c:\working\git\bonnanas\software\core\bsp\unicon\drivers\io.h
 
 1555998225 c:\working\git\bonnanas\software\core\bsp\unicon\drivers\usart.h
 	"defs.h"
@@ -960,17 +960,18 @@
 	<stdio.h>
 	"unicon.h"
 
-1555998225 source:c:\working\git\bonnanas\software\core\libs\ds18b20\ds18b20.c
+1556173748 source:c:\working\git\bonnanas\software\core\libs\ds18b20\ds18b20.c
+	"defs.h"
 	"one_wire.h"
 	"ds18b20.h"
 
-1555998225 c:\working\git\bonnanas\software\core\libs\ds18b20\ds18b20.h
+1556173717 c:\working\git\bonnanas\software\core\libs\ds18b20\ds18b20.h
 
-1555998225 source:c:\working\git\bonnanas\software\core\src\motor.c
+1556173410 source:c:\working\git\bonnanas\software\core\src\motor.c
 	"motor.h"
 	"io.h"
 
-1555998225 c:\working\git\bonnanas\software\core\inc\motor.h
+1556172430 c:\working\git\bonnanas\software\core\inc\motor.h
 	"stm32f0xx_ll_gpio.h"
 	"defs.h"
 
@@ -1048,7 +1049,7 @@
 
 1555307983 source:c:\working\git\bonnanas\software\startup\startup_stm32f0xx.s
 
-1556008386 source:c:\working\git\bonnanas\software\core\src\main.c
+1556173784 source:c:\working\git\bonnanas\software\core\src\main.c
 	"main.h"
 	<stdio.h>
 	"unicon.h"

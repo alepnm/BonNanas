@@ -69,7 +69,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-const char version[] = "Ver. 1.0-20190423";
+const char version[] = "Ver. 1.1-20190425";
 SysData_TypeDef SysData;
 
 uint8_t ds_status;
@@ -150,9 +150,9 @@ int main(void) {
     UNI_Start();
 
     DS18B20_PortInit();
-    ds_status = DS18B20_Init(SKIP_ROM);
+    ds_status = DS18B20_Init(DS_MODE_SKIP_ROM);
 
-    DS18B20_MeasureTemperCmd(SKIP_ROM, 0);
+    DS18B20_MeasureTemperCmd(DS_MODE_SKIP_ROM, 0);
     Delay_ms(100);
 
 
@@ -185,11 +185,11 @@ int main(void) {
 
                 ds_delay = 10;
 
-                DS18B20_ReadStratchpad(SKIP_ROM, 0);
+                DS18B20_ReadStratchpad(DS_MODE_SKIP_ROM, 0);
                 SysData.temper = DS18B20_Convert(0);
 
                 Delay_ms(10);
-                DS18B20_MeasureTemperCmd(SKIP_ROM, 0);
+                DS18B20_MeasureTemperCmd(DS_MODE_SKIP_ROM, 0);
             } else {
 
                 ds_delay--;
@@ -865,7 +865,7 @@ static void NewMessageHandler(void) {
     }
 
 
-    if( !strncmp(ptrPrimaryRxBuffer, "AT+INF", 6 )) {
+    if( !strncmp(ptrPrimaryRxBuffer, "AT+STATUS", 9 )) {
 
         sprintf(ptrPrimaryTxBuffer, "%s%02.02f%s%u%s", "TEMP=", SysData.temper, "\r\nHUM=", SysData.ADC_Data.ch2, "\r\n");
         USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
@@ -873,6 +873,16 @@ static void NewMessageHandler(void) {
         sprintf(ptrPrimaryTxBuffer, "%s%u%s%u%s", "RV1=", SysData.ADC_Data.ch0, "\r\nRV2=", SysData.ADC_Data.ch1, "\r\n");
         USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
 
+        if(SysData.WindowState == Closed) sprintf(ptrPrimaryTxBuffer, "%s", "Window is Closed\r\n");
+        else sprintf(ptrPrimaryTxBuffer, "%s", "Window is Open\r\n");
+        USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
+
+        if( !L298_ENA_CHECK() ) sprintf(ptrPrimaryTxBuffer, "%s", "Driver Disabled\r\n");
+        else sprintf(ptrPrimaryTxBuffer, "%s", "Driver Enabled\r\n");
+        USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
+
+
+        // praleidziam eilute
         sprintf(ptrPrimaryTxBuffer, "%s", "\r\n");
         USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
 

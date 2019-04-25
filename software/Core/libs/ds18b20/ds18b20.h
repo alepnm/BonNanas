@@ -2,8 +2,8 @@
 #define DS18B20_H_INCLUDED
 
 
-#define SKIP_ROM        0
-#define NO_SKIP_ROM     1
+#define DS_MODE_SKIP_ROM        0
+#define DS_MODE_NOSKIP_ROM      1
 
 
 #define RESOLUTION_9BIT     0x1F

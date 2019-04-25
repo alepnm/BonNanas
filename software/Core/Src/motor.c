@@ -26,7 +26,7 @@ void L298_Init(SysData_TypeDef *self){
 }
 
 
-/*  */
+/* variklio kontrole */
 void L298_Process(SysData_TypeDef *self){
 
     if(self->MotorTimer < timestamp){
@@ -45,12 +45,12 @@ void L298_Process(SysData_TypeDef *self){
             if(self->MotorDriverOffTimerCounter < timestamp){
                 L298_ENA_Reset();
             }
-        }
-    }
+        }// (self->MotorState != Stopped)
+    }// (self->MotorTimer < timestamp)
 }
 
 
-/*  */
+/* atidarom langa */
 void L298_OpenWindow(SysData_TypeDef *self){
 
     if(self->WindowState == Opened || self->PauseTimer > timestamp){
@@ -70,7 +70,7 @@ void L298_OpenWindow(SysData_TypeDef *self){
 }
 
 
-/*  */
+/* uzdarom langa */
 void L298_CloseWindow(SysData_TypeDef *self){
 
     if(self->WindowState == Closed || self->PauseTimer > timestamp){
