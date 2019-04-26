@@ -3,7 +3,7 @@
 
 
 
-void NewMessageHandler(void);
+void NewMessageHandler(SysData_TypeDef *self);
 void SendOk(void);
 
 #endif /* COMMAND_H_INCLUDED */

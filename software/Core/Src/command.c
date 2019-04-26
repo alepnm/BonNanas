@@ -6,9 +6,6 @@
 #include "motor.h"
 
 
-
-
-extern SysData_TypeDef SysData;
 extern const char version[];
 
 /*  */
@@ -16,7 +13,7 @@ extern void SetDefaults(SysData_TypeDef *self);
 
 
 /*  */
-void NewMessageHandler(void) {
+void NewMessageHandler(SysData_TypeDef *self) {
 
     if( !strncmp(ptrPrimaryRxBuffer, "AT+HTEMP=", 9 )) {
 
@@ -32,12 +29,12 @@ void NewMessageHandler(void) {
             return;
         }
 
-        if(tmp <= SysData.LowTemperature){
+        if(tmp <= self->LowTemperature){
             sprintf(ptrPrimaryTxBuffer, "%s", "BAD PARAM: HTEMP<LTEMP\r\n");
             USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
             USART_ClearRxBuffer(PRIMARY_PORT);
         }else{
-            SysData.HighTemperature = tmp;
+            self->HighTemperature = tmp;
             SendOk();
         }
 
@@ -46,7 +43,7 @@ void NewMessageHandler(void) {
 
     if( !strncmp(ptrPrimaryRxBuffer, "AT+HTEMP?", 9 )) {
 
-        sprintf(ptrPrimaryTxBuffer, "%s%02u%s", "HTEMP=", SysData.HighTemperature, "\r\n");
+        sprintf(ptrPrimaryTxBuffer, "%s%02u%s", "HTEMP=", self->HighTemperature, "\r\n");
         USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
         while(RespondWaitingFlag);
 
@@ -69,12 +66,12 @@ void NewMessageHandler(void) {
             return;
         }
 
-        if(tmp >= SysData.HighTemperature){
+        if(tmp >= self->HighTemperature){
             sprintf(ptrPrimaryTxBuffer, "%s", "BAD PARAM: LTEMP>HTEMP\r\n");
             USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
             USART_ClearRxBuffer(PRIMARY_PORT);
         }else{
-            SysData.LowTemperature = tmp;
+            self->LowTemperature = tmp;
             SendOk();
         }
 
@@ -83,7 +80,7 @@ void NewMessageHandler(void) {
 
     if( !strncmp(ptrPrimaryRxBuffer, "AT+LTEMP?", 9 )) {
 
-        sprintf(ptrPrimaryTxBuffer, "%s%02u%s", "LTEMP=", SysData.LowTemperature, "\r\n");
+        sprintf(ptrPrimaryTxBuffer, "%s%02u%s", "LTEMP=", self->LowTemperature, "\r\n");
         USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
         while(RespondWaitingFlag);
 
@@ -106,7 +103,7 @@ void NewMessageHandler(void) {
             return;
         }
 
-        SysData.HighHumidity = tmp;
+        self->HighHumidity = tmp;
         USART_ClearRxBuffer(PRIMARY_PORT);
         SendOk();
         return;
@@ -114,7 +111,7 @@ void NewMessageHandler(void) {
 
     if( !strncmp(ptrPrimaryRxBuffer, "AT+HUMLEVEL?", 12 )) {
 
-        sprintf(ptrPrimaryTxBuffer, "%s%02u%s", "HUMLEVEL=", SysData.HighHumidity, "\r\n");
+        sprintf(ptrPrimaryTxBuffer, "%s%02u%s", "HUMLEVEL=", self->HighHumidity, "\r\n");
         USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
         while(RespondWaitingFlag);
 
@@ -137,7 +134,7 @@ void NewMessageHandler(void) {
             return;
         }
 
-        SysData.MotorSpeed = tmp;
+        self->MotorSpeed = tmp;
 
         USART_ClearRxBuffer(PRIMARY_PORT);
         SendOk();
@@ -147,7 +144,7 @@ void NewMessageHandler(void) {
 
     if( !strncmp(ptrPrimaryRxBuffer, "AT+SPEED?", 9 )) {
 
-        sprintf(ptrPrimaryTxBuffer, "%s%u%s", "SPEED=", SysData.MotorSpeed, "\r\n");
+        sprintf(ptrPrimaryTxBuffer, "%s%u%s", "SPEED=", self->MotorSpeed, "\r\n");
         USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
         while(RespondWaitingFlag);
 
@@ -171,7 +168,7 @@ void NewMessageHandler(void) {
             return;
         }
 
-        SysData.MotorRunTime = tmp;
+        self->MotorRunTime = tmp;
         USART_ClearRxBuffer(PRIMARY_PORT);
         SendOk();
         return;
@@ -179,7 +176,7 @@ void NewMessageHandler(void) {
 
     if( !strncmp(ptrPrimaryRxBuffer, "AT+RUNTIME?", 11 )) {
 
-        sprintf(ptrPrimaryTxBuffer, "%s%u%s", "RUNTIME=", SysData.MotorRunTime, "\r\n");
+        sprintf(ptrPrimaryTxBuffer, "%s%u%s", "RUNTIME=", self->MotorRunTime, "\r\n");
         USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
         while(RespondWaitingFlag);
 
@@ -203,7 +200,7 @@ void NewMessageHandler(void) {
             return;
         }
 
-        SysData.MotorPauseTime = tmp;
+        self->MotorPauseTime = tmp;
         USART_ClearRxBuffer(PRIMARY_PORT);
         SendOk();
         return;
@@ -211,7 +208,7 @@ void NewMessageHandler(void) {
 
     if( !strncmp(ptrPrimaryRxBuffer, "AT+PAUSETIME?", 13 )) {
 
-        sprintf(ptrPrimaryTxBuffer, "%s%u%s", "PAUSETIME=", SysData.MotorPauseTime, "\r\n");
+        sprintf(ptrPrimaryTxBuffer, "%s%u%s", "PAUSETIME=", self->MotorPauseTime, "\r\n");
         USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
         while(RespondWaitingFlag);
 
@@ -222,13 +219,13 @@ void NewMessageHandler(void) {
 
     if( !strncmp(ptrPrimaryRxBuffer, "AT+STATUS", 9 )) {
 
-        sprintf(ptrPrimaryTxBuffer, "%s%02.02f%s%u%s", "TEMP=", SysData.temper, "\r\nHUM=", SysData.ADC_Data.ch2, "\r\n");
+        sprintf(ptrPrimaryTxBuffer, "%s%02.02f%s%u%s", "TEMP=", self->temper, "\r\nHUM=", self->ADC_Data.ch2, "\r\n");
         USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
 
-        sprintf(ptrPrimaryTxBuffer, "%s%u%s%u%s", "RV1=", SysData.ADC_Data.ch0, "\r\nRV2=", SysData.ADC_Data.ch1, "\r\n");
+        sprintf(ptrPrimaryTxBuffer, "%s%u%s%u%s", "RV1=", self->ADC_Data.ch0, "\r\nRV2=", self->ADC_Data.ch1, "\r\n");
         USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
 
-        if(SysData.WindowState == Closed) sprintf(ptrPrimaryTxBuffer, "%s", "Window is Closed\r\n");
+        if(self->WindowState == Closed) sprintf(ptrPrimaryTxBuffer, "%s", "Window is Closed\r\n");
         else sprintf(ptrPrimaryTxBuffer, "%s", "Window is Open\r\n");
         USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
 
@@ -236,7 +233,7 @@ void NewMessageHandler(void) {
         else sprintf(ptrPrimaryTxBuffer, "%s", "Driver Enabled\r\n");
         USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
 
-        if( SysData.TestMode ) sprintf(ptrPrimaryTxBuffer, "%s", "Controller in Test mode\r\n");
+        if( self->TestMode ) sprintf(ptrPrimaryTxBuffer, "%s", "Controller in Test mode\r\n");
         else sprintf(ptrPrimaryTxBuffer, "%s", "Controller in Normal mode\r\n");
         USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
 
@@ -254,7 +251,7 @@ void NewMessageHandler(void) {
 
     if( !strncmp(ptrPrimaryRxBuffer, "AT+RESET", 8 )) {
 
-        SetDefaults(&SysData);
+        SetDefaults(self);
 
         sprintf(ptrPrimaryTxBuffer, "%s", "System RESET to defaults!\r\n");
         USART_SendString(PRIMARY_PORT, ptrPrimaryTxBuffer);
@@ -282,12 +279,12 @@ void NewMessageHandler(void) {
 
     if( !strncmp(ptrPrimaryRxBuffer, "AT+TEST=", 8 )) {
 
-        SysData.TestMode = atoi(ptrPrimaryRxBuffer+8);
+        self->TestMode = atoi(ptrPrimaryRxBuffer+8);
 
-        if(SysData.TestMode) {
+        if(self->TestMode) {
             /* jungiam Testini tezima */
-            L298_CloseWindow(&SysData);
-            SysData.WindowState = Closed;
+            L298_CloseWindow(self);
+            self->WindowState = Closed;
         } else {
 
 
@@ -301,14 +298,14 @@ void NewMessageHandler(void) {
 
 
     /* papildomos testinio rezimo komandos */
-    if(SysData.TestMode) {
+    if(self->TestMode) {
 
         if( !strncmp(ptrPrimaryRxBuffer, "AT+OPEN", 7 )) {
 
-            if(SysData.WindowState != Opened){
+            if(self->WindowState != Opened){
 
-                L298_OpenWindow(&SysData);
-                SysData.WindowState = Opened;
+                L298_OpenWindow(self);
+                self->WindowState = Opened;
 
                 SendOk();
             }else{
@@ -322,10 +319,10 @@ void NewMessageHandler(void) {
 
         if( !strncmp(ptrPrimaryRxBuffer, "AT+CLOSE", 8 )) {
 
-            if(SysData.WindowState != Closed){
+            if(self->WindowState != Closed){
 
-                L298_CloseWindow(&SysData);
-                SysData.WindowState = Closed;
+                L298_CloseWindow(self);
+                self->WindowState = Closed;
 
                 SendOk();
             }else{

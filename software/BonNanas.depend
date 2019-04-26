@@ -1050,7 +1050,7 @@
 
 1555307983 source:c:\working\git\bonnanas\software\startup\startup_stm32f0xx.s
 
-1556204099 source:c:\working\git\bonnanas\software\core\src\main.c
+1556288294 source:c:\working\git\bonnanas\software\core\src\main.c
 	"main.h"
 	<stdio.h>
 	"unicon.h"
@@ -1058,14 +1058,14 @@
 	"motor.h"
 	"command.h"
 
-1556204151 source:c:\working\git\bonnanas\software\core\src\command.c
+1556288283 source:c:\working\git\bonnanas\software\core\src\command.c
 	<stdio.h>
 	<string.h>
 	"usart.h"
 	"command.h"
 	"motor.h"
 
-1556204151 c:\working\git\bonnanas\software\core\inc\command.h
+1556287981 c:\working\git\bonnanas\software\core\inc\command.h
 
 1556225704 source:d:\projects\bonnanas\software\core\src\command.c
 	<stdio.h>

@@ -234,7 +234,7 @@ int main(void) {
 
         if(NewMessageFlag) {
 
-            NewMessageHandler();
+            NewMessageHandler(&SysData);
 
             NewMessageFlag = false;
         }
