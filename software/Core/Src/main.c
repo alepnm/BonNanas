@@ -90,11 +90,9 @@ static void MX_USART1_UART_Init(void);
 static void MX_TIM16_Init(void);
 /* USER CODE BEGIN PFP */
 
-static void LedHandler(void);
-//static void NewMessageHandler(void);
-//static void SendOk(void);
-static void TestModeHandler(SysData_TypeDef *self);
-void SetDefaults(SysData_TypeDef *self);
+static void LedHandler(void);				// LEDu hendleris
+static void TestModeHandler(SysData_TypeDef *self);	// Testinio rezimo hendleris
+void SetDefaults(SysData_TypeDef *self);		// Nustatyti parametru pradines reiksmes
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -110,10 +108,12 @@ void SetDefaults(SysData_TypeDef *self);
   * @brief  The application entry point.
   * @retval int
   */
+
+/* pagrindine funkcija - programa prasideda cia ir eina zemyn */
 int main(void) {
     /* USER CODE BEGIN 1 */
-    static volatile uint32_t delay = 0;
-    static uint8_t ds_delay = 0;
+    static volatile uint32_t delay = 0;		// pagrindinio laikmacio skaitliukas - 100ms periodas
+    static uint8_t ds_delay = 0;		// temperaturos matavimo skaitliukas - 1s periodas 
 
     /* USER CODE END 1 */
 
@@ -122,8 +122,8 @@ int main(void) {
     /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
 
 
-    LL_APB1_GRP2_EnableClock(LL_APB1_GRP2_PERIPH_SYSCFG);
-    LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
+    LL_APB1_GRP2_EnableClock(LL_APB1_GRP2_PERIPH_SYSCFG);	// -> ijungiam GRP2 proco hardwaro taktavima
+    LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);		// -> ijungiam GRP1 proco hardwaro taktavima
 
     /* System interrupt init*/
 
@@ -132,111 +132,116 @@ int main(void) {
     /* USER CODE END Init */
 
     /* Configure the system clock */
-    SystemClock_Config();
+    SystemClock_Config();					// -> sukonfiguruojam Sistemos taktavima
 
     /* USER CODE BEGIN SysInit */
-    SysTick_Config(SystemCoreClock/1000);
+    SysTick_Config(SystemCoreClock/1000);			// -> sukonfiguruojam ir ijungiam sistemini taimeri - 1ms periodas
     /* USER CODE END SysInit */
 
     /* Initialize all configured peripherals */
-    MX_GPIO_Init();
-    MX_ADC_Init();
-    MX_USART1_UART_Init();
-    MX_TIM16_Init();
+    MX_GPIO_Init();						// -> sukonfiguruojam portus ir pinus
+    MX_ADC_Init();						// -> sukonfiguruojam ADC konvertoriu( Analog to Digital Convertor),
+								// kad galetume nuskaityti dregmes daviklio, potenciometru reiksmes
+    MX_USART1_UART_Init();					// -> sukonfiguruojam UART
+    MX_TIM16_Init();						// -> sukonfiguruojam TIM16 taimeri, kad galetume keisti variklio
+								// sukimosi greiti
     /* USER CODE BEGIN 2 */
 
-    LL_mDelay(10);
+    LL_mDelay(10);						// ->pauze 10ms
 
-    SetDefaults(&SysData);
+    SetDefaults(&SysData);					// ->nustatom pradines reiksmes
 
-    UNI_Start();
+    UNI_Start();						// ->sukonfiguruojam Unicon plokste
 
-    DS18B20_PortInit();
-    ds_status = DS18B20_Init(DS_MODE_SKIP_ROM);
+    DS18B20_PortInit();						// ->sukonfiguruojam temperaturos daviklio porta
+    ds_status = DS18B20_Init(DS_MODE_SKIP_ROM);			// ->startuojam temperaturos davikli
 
-    DS18B20_MeasureTemperCmd(DS_MODE_SKIP_ROM, 0);
-    Delay_ms(100);
+    DS18B20_MeasureTemperCmd(DS_MODE_SKIP_ROM, 0);		// ->paleidziam temperaturos matavima, rezultata galesim pasiimti veliau
+								// ->(po ~1ms)
+    Delay_ms(100);						// ->pauze 100ms
 
 
-    L298_Init(&SysData);
+    L298_Init(&SysData);					// ->inicializuojam proco hartwara, kuris valdys variklio draiveri - 
+								// ->TIM16 ir ENABLE, IN1, IN2 portus
 
     /* USER CODE END 2 */
 
     /* Infinite loop */
     /* USER CODE BEGIN WHILE */
 
-    while (1) {
+    while (1) {							// ->pagrindinis ciklas
 
-        if(delay <= timestamp) {
+        if(delay <= timestamp) {				// ->pagrindinio laikmacio ciklas
 
             delay = timestamp + 100;
 
-            ADC_Read_VREFINT();
+            ADC_Read_VREFINT();					// ->matuojam maitinimo itampa, kad veliau galetume perskaicuoti ADC reiksmes
+								// milivoltais. Bet mes to nedarome
 
-            SysData.ADC_Data.ch0 = ADC_ReadAnalog(CH_POT_RV1);
+            SysData.ADC_Data.ch0 = ADC_ReadAnalog(CH_POT_RV1);	// -> skaitom ADC kanala CH0 (potenciometras RV1)
             Delay_ms(10);
 
-            SysData.ADC_Data.ch1 = ADC_ReadAnalog(CH_POT_RV2);
+            SysData.ADC_Data.ch1 = ADC_ReadAnalog(CH_POT_RV2);	// -> skaitom ADC kanala CH1 (potenciometras RV2)
             Delay_ms(10);
 
-            SysData.ADC_Data.ch2 = ADC_ReadAnalog(CH_HUMIDITY);
+            SysData.ADC_Data.ch2 = ADC_ReadAnalog(CH_HUMIDITY);	// -> skaitom ADC kanala CH5 (dregmes daviklis)
             Delay_ms(10);
 
-            if(ds_delay == 0) {
+            if(ds_delay == 0) {					// ->temperaturos daviklio ciklas
 
                 ds_delay = 10;
 
-                DS18B20_ReadStratchpad(DS_MODE_SKIP_ROM, 0);
-                SysData.temper = DS18B20_Convert(0);
+                DS18B20_ReadStratchpad(DS_MODE_SKIP_ROM, 0);	// -> skaitom temperaturos daviklio duomenys
+                SysData.temper = DS18B20_Convert(0);		// -> konvertuojam jo duomenys i temperatura
 
                 Delay_ms(10);
-                DS18B20_MeasureTemperCmd(DS_MODE_SKIP_ROM, 0);
+                DS18B20_MeasureTemperCmd(DS_MODE_SKIP_ROM, 0);	// -> paleidziam sekanti matavima
             } else {
 
-                ds_delay--;
+                ds_delay--;					// -> mazinam temperaturos daviklio laikmacio skaitliuka
             }
 
-            if(SysData.TestMode == 0) {
+            if(SysData.TestMode == 0) {					// -> jai esame normaliame rezime, vykdom darbo logika
 
-                if(SysData.ADC_Data.ch2 >= SysData.HighHumidity) {
-                    L298_CloseWindow(&SysData);
-                    LED6_ON();
-                } else {
+                if(SysData.ADC_Data.ch2 >= SysData.HighHumidity) {	// jai nuskaityta dregmes daviklio reiksme didesne uz nustatyta:
+                    L298_CloseWindow(&SysData);				// uzdarom langa
+                    LED6_ON();						// uzdegam LED6 sviesos dioda
+                } else {						// jai ne:
 
-                    LED6_OFF();
+                    LED6_OFF();						// gesinam LED6 sviesos dioda
 
-                    if(SysData.temper >= SysData.HighTemperature) {
-                        L298_OpenWindow(&SysData);
-                        LED7_ON();
-                    } else {
+                    if(SysData.temper >= SysData.HighTemperature) {	// jai nuskaityta temperatura virsyja auksciausia:
+                        L298_OpenWindow(&SysData);			// atidarom langa
+                        LED7_ON();					// uzdegam LED7 sviesos dioda
+                    } else {						// jai ne:
 
-                        if(SysData.temper < SysData.LowTemperature) {
-                            L298_CloseWindow(&SysData);
+                        if(SysData.temper < SysData.LowTemperature) {	// jai nuskaityta temperatura mazesne uz zemiausia:
+                            L298_CloseWindow(&SysData);			// uzdarom langa
                         }
 
-                        LED7_OFF();
+                        LED7_OFF();					// gesinam LED7 svesos dioda
                     }
                 }
-            } else {
+            } else {							// jai esam Teste
                 /* testas */
 
-                TestModeHandler(&SysData);
+                TestModeHandler(&SysData);				// vykdom testa
             }
 
-            L298_Process(&SysData);
+            L298_Process(&SysData);					// valdom varikli
 
-            UNI_Process();
+            UNI_Process();						// valdom Unicon plokste (musu atveju nieko nedarom)
 
-            LedHandler();
+            LedHandler();						// valdom kitus sviesos diodus
 
-        }
+        }								// pagrindinio laikmacio ciklo pabaiga
 
 
-        if(NewMessageFlag) {
+        if(NewMessageFlag) {						// jai per UARTA gavom komanda
 
-            NewMessageHandler(&SysData);
+            NewMessageHandler(&SysData);				// vykdom ja
 
-            NewMessageFlag = false;
+            NewMessageFlag = false;					// numetam naujos komandos flaga
         }
 
         /* USER CODE END WHILE */
@@ -244,7 +249,7 @@ int main(void) {
         /* USER CODE BEGIN 3 */
 
 
-    }
+    }									// pagrindinio ciklo pabaiga - gryztam i pradzia
     /* USER CODE END 3 */
 }
 
